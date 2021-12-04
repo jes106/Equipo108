@@ -12,6 +12,6 @@ Se plantea realizar un programa para un grupo de investigación de la Universida
 
 
 
-                                                            Antonio Díaz Pérez - i02dipea@uco.es
-                                                            Jesús Escribano Serena - i02essej@uco.es
-                                                            Álvaro Gutiérrez García - i02gugaa@uco.es
+                                                                                         Antonio Díaz Pérez - i02dipea@uco.es
+                                                                                     Jesús Escribano Serena - i02essej@uco.es
+                                                                                    Álvaro Gutiérrez García - i02gugaa@uco.es
