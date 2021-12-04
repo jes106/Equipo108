@@ -1,7 +1,10 @@
 #include <string>
-#include 
-#include 
-#include 
+#include <cstdio>
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
 
 
 int main(){
@@ -64,6 +67,8 @@ int main(){
 }
 
 //Posibles funciones a implementar
-nuevoUsuario(string nick); //implica guardarlos en un txt
+void nuevoUsuario(string nick); //implica guardarlos en un txt
 //las reservas tambien habria que guardarlas en un fichero a traves de una struct: guarda la fecha de inicio(int),la de final(int) y los recursos(int)
-
+void menuAdmin1();
+void menuAdmin2();
+void menuUsuario();
