@@ -26,14 +26,17 @@ int main(){
     if(nick=="admin1"){
         //aqui imprimimos el menu del adminitrador 1 (admin de los usuarios)
         menuAdmin1();
+
     }
     else if(nick=="admin2"){
         //aqui imprimimos el menu del adminitrador 2 (admin de las maquinas)
         menuAdmin2();
+        //para poder usar el mismo switch para todos y que a todos les aparezca desde 1 podemos podemos antes de salir del if hacer una suma con las opciones ya acumuladas
     }
     else{
         //aqui imprimimos el menu de los usuarios normales
         menuUsuario();
+        //para poder usar el mismo switch para todos y que a todos les aparezca desde 1 podemos podemos antes de salir del if hacer una suma con las opciones ya acumuladas
     }
 
     int opcion; //creamos este entero para las opciones del switch
