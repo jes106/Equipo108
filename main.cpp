@@ -34,4 +34,5 @@ int main(){
     else if(usuario.tipo == 3){ menuUsuario(); }
 
     return 0;
+    
 }
