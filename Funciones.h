@@ -18,8 +18,11 @@ struct Usuario
 void identificar_usuario(string *nick, string *password);
 int comprueba_login(Usuario *usuario);
 
-void menuAdmin1();
-void menuAdmin2();
-void menuUsuario();
+void menuAdmin1(int *opcion);
+void menuAdmin2(int *opcion);
+void menuUsuario(int *opcion);
+
+void crearUsuario();
+void actualizaUsuario();
 
 #endif
