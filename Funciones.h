@@ -21,4 +21,5 @@ int comprueba_login(Usuario *usuario);
 void menuAdmin1();
 void menuAdmin2();
 void menuUsuario();
+
 #endif

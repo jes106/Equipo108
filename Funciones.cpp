@@ -57,4 +57,5 @@ void menuAdmin2(){
 }
 void menuUsuario(){
     int d;  //Creadas solo para que no diera error
+    
 }
