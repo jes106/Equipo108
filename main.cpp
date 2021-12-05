@@ -33,11 +33,14 @@ int main(){
         }
         cout << endl << endl;
         //Una vez que el usuario ha accedido al sistema se le mostrara un menu personalizado en funcion del tipo de usuario
-        if(usuario.tipo == 1 && encontrado == 1){ menuAdmin1(&opcion); }
-        else if(usuario.tipo == 2){ menuAdmin2(&opcion); }
-        else if(usuario.tipo == 3){ menuUsuario(&opcion); }
+        if(usuario.tipo == 1 && encontrado == 1){ opcion=menuAdmin1(); }
+        else if(usuario.tipo == 2){ opcion=menuAdmin2(); }
+        else if(usuario.tipo == 3){ opcion=menuUsuario(); }
 
-        switch (opcion>=1 && opcion<=7){
+        switch (opcion>=0 && opcion<=8){
+        case 0:
+            encontrado=0;
+            break;
         case 1:
             crearUsuario();
             break;
@@ -45,23 +48,28 @@ int main(){
             actualizaUsuario();
             break;
     /*    case 3:
-            
+            actualizaReserva();
             break;
         case 4:
-            
+            addMaquina();
             break;
         case 5:
-            
+            actualizaMaquina();
             break;
         case 6:
-        
-            break;*/
-        case 0:
-            encontrado = 0;
+            actualizaReserva();
             break;
+        case 7:
+            crearReserva();
+            break;
+        case 8:
+            actualizaReserva();
+            break;*/
         }
     }
 
+    cout<<"Saliendo del programa...\n";
+    cout<<"Hasta luego, tenga un buen día\n";
     return 0;
     
 }
