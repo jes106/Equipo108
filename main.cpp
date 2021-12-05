@@ -33,43 +33,44 @@ int main(){
         }
         cout << endl << endl;
         //Una vez que el usuario ha accedido al sistema se le mostrara un menu personalizado en funcion del tipo de usuario
-        if(usuario.tipo == 1 && encontrado == 1){ opcion=menuAdmin1(); }
-        else if(usuario.tipo == 2){ opcion=menuAdmin2(); }
-        else if(usuario.tipo == 3){ opcion=menuUsuario(); }
-
-        switch (opcion>=0 && opcion<=8){
-        case 0:
-            encontrado=0;
-            break;
-        case 1:
-            crearUsuario();
-            break;
-       case 2:
-            actualizaUsuario();
-            break;
-    /*    case 3:
-            actualizaReserva();
-            break;
-        case 4:
-            addMaquina();
-            break;
-        case 5:
-            actualizaMaquina();
-            break;
-        case 6:
-            actualizaReserva();
-            break;
-        case 7:
-            crearReserva();
-            break;
-        case 8:
-            actualizaReserva();
-            break;*/
+        if(usuario.tipo == 1 && encontrado == 1){ opcion = menuAdmin1(); }
+        else if(usuario.tipo == 2){ opcion = menuAdmin2(); }
+        else if(usuario.tipo == 3){ opcion = menuUsuario(); }
+        if(opcion>=0 && opcion<=8){
+            switch (opcion){
+            case 0:
+                encontrado=0;
+                break;
+            case 1:
+                crearUsuario();
+                break;
+            case 2:
+                actualizaUsuario();
+                break;
+            /*case 3:
+                actualizaReserva();
+                break;
+            case 4:
+                addMaquina();
+                break;
+            case 5:
+                actualizaMaquina();
+                break;
+            case 6:
+                actualizaReserva();
+                break;
+            case 7:
+                crearReserva();
+                break;
+            case 8:
+                actualizaReserva();
+                break;*/
+            }
         }
     }
 
-    cout<<"Saliendo del programa...\n";
-    cout<<"Hasta luego, tenga un buen día\n";
+    cout << "Saliendo del programa..." << endl;
+    cout << "Hasta luego, tenga un buen día" << endl;
     return 0;
     
 }
