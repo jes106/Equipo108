@@ -46,39 +46,65 @@ int comprueba_login(Usuario *usuario){
     return encontrado;   
 }
 
-void menuAdmin1(int *opcion){
-    cout << "/------------------------------------------------/" << endl;
-    cout << "/             MENU - ADMINISTRADOR 1             /" << endl;
-    cout << "/------------------------------------------------/" << endl;
+int menuAdmin1(){
     cout << "0. Salir" << endl;
-    cout << "1. Crear Usurio." << endl;
-    cout << "2. Actualizar Usuario." << endl;
-    cout << "Selecciones una opcion:";
-    cin >> *opcion;
-    cin.ignore();                                  //Tenemos que limpiar el buffer despues de un cin para que no se quede almacenado un "\n"
-}
-void menuAdmin2(int *opcion){
-    cout << "/------------------------------------------------/" << endl;
-    cout << "/             MENU - ADMINISTRADOR 2             /" << endl;
-    cout << "/------------------------------------------------/" << endl;
-    cout << "0. Salir" << endl;
-    cout << "3. Añadir Maquinas." << endl;
-    cout << "4. Actualizar Maquinas." << endl;
-    cout << "Selecciones una opcion:";
-    cin >> *opcion;
-    fflush(stdin);                                  //Tenemos que limpiar el buffer despues de un cin para que no se quede almacenado un "\n"
-}
-void menuUsuario(int *opcion){
-    cout << "/------------------------------------------------/" << endl;
-    cout << "/                 MENU - Usuario                 /" << endl;
-    cout << "/------------------------------------------------/" << endl;
-    cout << "0. Salir" << endl;
-    cout << "5. Crear Reserva." << endl;
-    cout << "6. Actualizar Reserva." << endl;
-    cout << "Selecciones una opcion:";
-    cin >> *opcion;
-    fflush(stdin);                                  //Tenemos que limpiar el buffer despues de un cin para que no se quede almacenado un "\n"
+    cout << "1. Crear Usuario." << endl;
+    cout << "2. Actualizar Usuarios." << endl;
+    cout << "3. Actualizar Reservas." << endl;
+    cout << "Seleccione una opcion:";
+    int x;
+    cin >> x;
     
+    cin.ignore();                                  //Tenemos que limpiar el buffer despues de un cin para que no se quede almacenado un "\n"
+    return x;
+}
+int menuAdmin2(){
+    cout << "0. Salir" << endl;
+    cout << "1. Añadir Maquina." << endl;
+    cout << "2. Actualizar Maquinas." << endl;
+    cout << "3. Actualizar Reservas." << endl;
+    cout << "Seleccione una opcion:";
+    int x;
+    cin >> x;
+    
+    fflush(stdin);                                  //Tenemos que limpiar el buffer despues de un cin para que no se quede almacenado un "\n"
+
+    if(x==1){
+        x=4;
+        return x;
+    }
+    else if(x==2){
+        x=5;
+        return x;
+    }
+    else if(x==3){
+        x=6;
+        return x;
+    }
+    else{
+        return 0;
+    }
+}
+int menuUsuario(){
+    cout << "0. Salir" << endl;
+    cout << "1. Crear Reserva." << endl;
+    cout << "2. Actualizar Reserva." << endl;
+    cout << "Seleccione una opcion:";
+    int x;
+    cin >> x;
+    
+    fflush(stdin);                                  //Tenemos que limpiar el buffer despues de un cin para que no se quede almacenado un "\n"
+    if(x==1){
+        x=7;
+        return x;
+    }
+    else if(x==2){
+        x=8;
+        return x;
+    }
+    else{
+        return 0;
+    }    
 }
 
 void crearUsuario(){
@@ -105,6 +131,7 @@ void crearUsuario(){
 
 void actualizaUsuario(){
 }
+
 
 
 
