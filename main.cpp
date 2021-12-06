@@ -55,13 +55,15 @@ int main(){
         if(opcion>=0 && opcion<=8){
             switch (opcion){
             case 0:
-                encontrado = false;
+                encontrado = true;
                 break;
             case 1:
-                crearUsuario();
+                AdminU.creaUsuario();
+                encontrado = false;
                 break;
             case 2:
                 actualizaUsuario();
+                encontrado = false;
                 break;
             /*case 3:
                 actualizaReserva();
