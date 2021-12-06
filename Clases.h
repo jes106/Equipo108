@@ -28,7 +28,7 @@ protected:
 
 };
 
-class Administrador{
+class Administrador: public Usuario{
 protected:
     Administrador();
     bool ActualizarReserva(string nickReservado, string fechaNueva);
