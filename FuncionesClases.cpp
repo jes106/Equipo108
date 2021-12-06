@@ -30,23 +30,39 @@ bool Usuario::comprueba_login(){
         exit(-1);
     }
 
-    while(fichero >> aux.nick && encontrado == false){
-        fichero >> aux.password;
-        fichero >> aux.nombrecompleto;
-        fichero >> aux.email;
+    while(getline(fichero, aux.nick, ';') && encontrado == false){
+        getline(fichero, aux.password, ';');
+        getline(fichero, aux.nombrecompleto, ';');
+        getline(fichero, aux.email, ';');
         fichero >> aux.tipo;
 
-        if(nick_ != aux.nick && password_ != aux.password){
-            encontrado = false;
-        }
-        else{ 
+cout << endl;
+cout << "Nick -> <" << nick_ << ">" << endl;
+cout << "Password -> " << password_ << endl;
+cout << endl;
+cout << "aux.Nick -> <" << aux.nick << ">" << endl;
+cout << "aux.Password -> " << aux.password << endl;
+cout << "aux.Nombre Completo -> " << aux.nombrecompleto << endl;
+cout << "aux.Email -> " << aux.email << endl;
+cout << "aux.Tipo -> " << aux.tipo << endl;
+cout << endl;
+
+
+        if(nick_ == aux.nick && password_ == aux.password){ 
             encontrado = true; 
             nombrecompleto_ = aux.nombrecompleto;
             email_ = aux.email;
             tipo_ = aux.tipo;
         }
+        else{ encontrado = 0;}
     }
 
+    if(encontrado == false){
+        cout << "El usuario no se encuentra en la base de datos. Contacte con el administrador 1 para que registre." << endl;
+    }
+cout << endl;
+cout << "Encontrado -> " << encontrado << endl;
+cout << endl;
     return encontrado;
 }
 
@@ -58,7 +74,44 @@ void Usuario::imprimeDatos(){
    // cout << "Tipo -> " << tipo_ << endl;
 }
 
+void AdministradorUsu::creaUsuario(){
+    string nombre, email;
+    int tipo;
+    bool encontrado = false;
+    Usuario aux;
+    string login, contrasena;
 
+    //Pedimos al administrador que introduzca los datos del cliente.
+    aux.identificar_usuario();
+
+    encontrado = aux.comprueba_login();
+
+    if(encontrado == false){
+        cout << "Introduce el Nombre Completo (sin espacios) -> ";
+        getline(cin, nombre, '\n');
+        cout << "Introduce el email -> ";
+        getline(cin, email);
+        cout << "Tipos de Usuario:\n\tAdminitrador 1 = 1\n\tAdministrador 2 = 2\n\tUsuario = 3" << endl;
+        cout << "Introduce el tipo de usuario -> ";
+        cin >> tipo;
+        aux.setnombrecompleto(nombre);
+        aux.setemail(email);
+        aux.settipo(tipo);
+
+        fstream fichero("BASE_DE_DATOS.txt", ios::app);
+        if(!fichero){                                                        //Comprobamos que el fichero se ha abierto correctamente
+            cout << "ERROR. Error al abrir el fichero." << endl;
+            exit(-1);
+        }
+
+        fichero << aux.getnick() << ";" << aux.getpassword() << ";" << aux.getnombrecompleto() << ";" << aux.getemail() << ";" << aux.gettipo() << "\n";
+        cout << "Usuario añadido con exito." << endl;
+    }else{
+        cout << "El usuario ya se encuentra en la base de datos." << endl;
+    }
+
+    
+}
 
 
 

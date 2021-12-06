@@ -17,8 +17,9 @@ public:
     inline string getnombrecompleto(){ return nombrecompleto_; }
     inline void setnombrecompleto(string nombrecompleto){ nombrecompleto_ = nombrecompleto;}
     inline string getemail(){ return email_; }
-    inline void settipo(int tipo){ tipo_ = tipo;}
+    inline void setemail(string email){ email_ = email; }
     inline int gettipo(){ return tipo_; }
+    inline void settipo(int tipo){ tipo_ = tipo;}
     //bool comprueba_login(string nick);                                    Funciones originales del diagrama de clases
     //void identificar_usuario(string *nick, string *password);
 protected:
@@ -34,13 +35,14 @@ protected:
 
 class Administrador: public Usuario{
 protected:
-    Administrador();
     bool ActualizarReserva(string nickReservado, string fechaNueva);
 };
 
 class AdministradorUsu: public Administrador{
-private:
-    bool creaUsuario(string nick, string nombrecompleto, string password, string edad, string tipo);
+public:
+    void creaUsuario();                                                         //Funciones Modificadas
+
+    //bool creaUsuario(string nick, string nombrecompleto, string password, string edad, string tipo);
     bool actualizaUsuario(string ncik);
     //bool comprueba_login(string nick);                                        La introduzco en la clase Usuario
     string seleccionaUsuario();
