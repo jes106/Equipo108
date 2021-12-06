@@ -7,22 +7,10 @@
 #include "Funciones.h"
 using namespace std;
 
-
-void identificar_usuario(string *nick, string *password){
-    cout << "/-----------------------------------------------/" << endl;
-    cout << "/           IDENTIFICACION DE USUARIO           /" << endl;
-    cout << "/-----------------------------------------------/" << endl;
-
-    cout << "Nickname -> ";
-    getline(cin, *nick);
-    cout << "Password -> ";
-    getline(cin, *password);
-
-}
-
-int comprueba_login(Usuario *usuario){
-    Usuario aux;
-    int encontrado = 0;                                                        //Variable que indica si el usuario esta o no en la base de datos.
+/*
+bool comprueba_login(Users *users){
+    Users aux;
+    bool encontrado = false;                                                        //Variable que indica si el usuario esta o no en la base de datos.
 
     string filename = "BASE_DE_DATOS.txt";
     fstream fichero(filename, ios::in);                                         //Abrimos el fichero en modo entrada(lectura)
@@ -31,21 +19,21 @@ int comprueba_login(Usuario *usuario){
         exit(-1);
     }
 
-    while(fichero >> aux.nick && encontrado == 0){
+    while(fichero >> aux.nick && encontrado == false){
         fichero >> aux.password;
         fichero >> aux.tipo;
     }
 
-    if(usuario->nick != aux.nick && usuario->password != aux.password){
+    if(users->nick != aux.nick && users->password != aux.password){
             cout << "No se encuentra registrado en la Base de Datos. Debe comunicarse con un administrador para que lo registre." << endl;
-            encontrado = 0;
+            encontrado = false;
     }
-    else{ encontrado = 1; }
+    else{ encontrado = true; }
 
-    *usuario = aux;
+    *users = aux;
     return encontrado;   
 }
-
+*/
 int menuAdmin1(){
     cout << "0. Cerrar Sesion." << endl;
     cout << "1. Crear Usuario." << endl;
@@ -92,7 +80,7 @@ int menuUsuario(){
 }
 
 void crearUsuario(){
-    Usuario aux;
+    Users aux;
 
     //Pedimos al administrador que introduzca los datos del cliente.
     cout << "Introduce nick -> ";

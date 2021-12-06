@@ -7,16 +7,17 @@
 #include <iostream>
 using namespace std;
 
-struct Usuario
+struct Users
 {
     string nick;
     string password;
+    string nombrecompleto;
+    string email;
     int tipo;                //Indicara el tipo de usuario que es [Administrador1] = 1  [Administrador2] = 2   [Usuario] = 3
 };
 
 
-void identificar_usuario(string *nick, string *password);
-int comprueba_login(Usuario *usuario);
+//bool comprueba_login(Users *users);
 
 int menuAdmin1();
 int menuAdmin2();
