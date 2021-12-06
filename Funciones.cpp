@@ -33,6 +33,29 @@ bool comprueba_login(Users *users){
     *users = aux;
     return encontrado;   
 }
+
+
+void crearUsuario(){
+    Users aux;
+
+    //Pedimos al administrador que introduzca los datos del cliente.
+    cout << "Introduce nick -> ";
+    getline(cin, aux.nick);
+    cout << "Introduce password -> ";
+    getline(cin, aux.password);
+    cout << "Tipos de Usuario:\n\tAdminitrador 1 = 1\n\tAdministrador 2 = 2\n\tUsuario = 3" << endl;
+    cout <<  "Introduce el tipo de usuario -> ";
+    cin >> aux.tipo;
+
+    fstream fichero("BASE_DE_DATOS.txt", ios::app);
+    if(!fichero){                                                        //Comprobamos que el fichero se ha abierto correctamente
+        cout << "ERROR. Error al abrir el fichero." << endl;
+        exit(-1);
+    }
+
+    fichero << aux.nick << "\t" << aux.password << "\t" << aux.tipo << endl;
+    cout << "Usuario añadido con exito." << endl;
+}
 */
 int menuAdmin1(){
     cout << "0. Cerrar Sesion." << endl;
@@ -79,27 +102,7 @@ int menuUsuario(){
     return x;    
 }
 
-void crearUsuario(){
-    Users aux;
 
-    //Pedimos al administrador que introduzca los datos del cliente.
-    cout << "Introduce nick -> ";
-    getline(cin, aux.nick);
-    cout << "Introduce password -> ";
-    getline(cin, aux.password);
-    cout << "Tipos de Usuario:\n\tAdminitrador 1 = 1\n\tAdministrador 2 = 2\n\tUsuario = 3" << endl;
-    cout <<  "Introduce el tipo de usuario -> ";
-    cin >> aux.tipo;
-
-    fstream fichero("BASE_DE_DATOS.txt", ios::app);
-    if(!fichero){                                                        //Comprobamos que el fichero se ha abierto correctamente
-        cout << "ERROR. Error al abrir el fichero." << endl;
-        exit(-1);
-    }
-
-    fichero << aux.nick << "\t" << aux.password << "\t" << aux.tipo << endl;
-    cout << "Usuario añadido con exito." << endl;
-}
 
 void actualizaUsuario(){
 
