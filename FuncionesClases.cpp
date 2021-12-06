@@ -13,9 +13,9 @@ void Usuario::identificar_usuario(){
     cout << "/-----------------------------------------------/" << endl;
 
     cout << "Nickname -> ";
-    getline(cin, nick);
+    getline(cin, nick_);
     cout << "Password -> ";
-    getline(cin, password);
+    getline(cin, password_);
 
 }
 
@@ -35,26 +35,27 @@ bool Usuario::comprueba_login(){
         fichero >> aux.nombrecompleto;
         fichero >> aux.email;
         fichero >> aux.tipo;
-    }
 
-    if(nick != aux.nick && password != aux.password){
-            cout << "No se encuentra registrado en la Base de Datos. Debe comunicarse con un administrador para que lo registre." << endl;
+        if(nick_ != aux.nick && password_ != aux.password){
             encontrado = false;
+        }
+        else{ 
+            encontrado = true; 
+            nombrecompleto_ = aux.nombrecompleto;
+            email_ = aux.email;
+            tipo_ = aux.tipo;
+        }
     }
-    else{ encontrado = true; }
 
-    nombrecompleto = aux.nombrecompleto;
-    email = aux.email;
-    tipo = aux.tipo;
     return encontrado;
 }
 
 void Usuario::imprimeDatos(){
-    cout << "Nick -> " << nick << endl;
-    cout << "Password -> " << password << endl;
-    //cout << "Nombre Completo -> " << nombrecompleto << endl;
-    //cout << "Email -> " << email << endl;
-   // cout << "Tipo -> " << tipo << endl;
+    cout << "Nick -> " << nick_ << endl;
+    cout << "Password -> " << password_ << endl;
+    //cout << "Nombre Completo -> " << nombrecompleto_ << endl;
+    //cout << "Email -> " << email_ << endl;
+   // cout << "Tipo -> " << tipo_ << endl;
 }
 
 

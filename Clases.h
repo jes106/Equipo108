@@ -10,19 +10,23 @@ public:
     void identificar_usuario();                                             //Funciones modificadas
     bool comprueba_login();
     void imprimeDatos();
-    inline string getnick(){ return nick; }
-    inline string getpassword(){ return password; }
-    inline string getnombrecompleto(){ return nombrecompleto; }
-    inline string getemail(){ return email; }
-    inline int gettipo(){ return tipo; }
+    inline string getnick(){ return nick_; }
+    inline void setnick(string nick){ nick_ = nick; }
+    inline string getpassword(){ return password_; }
+    inline void setpassword(string password){ password_ = password; }
+    inline string getnombrecompleto(){ return nombrecompleto_; }
+    inline void setnombrecompleto(string nombrecompleto){ nombrecompleto_ = nombrecompleto;}
+    inline string getemail(){ return email_; }
+    inline void settipo(int tipo){ tipo_ = tipo;}
+    inline int gettipo(){ return tipo_; }
     //bool comprueba_login(string nick);                                    Funciones originales del diagrama de clases
     //void identificar_usuario(string *nick, string *password);
 protected:
-    string nick;
-    string password;
-    string nombrecompleto;
-    string email;
-    int tipo;
+    string nick_;
+    string password_;
+    string nombrecompleto_;
+    string email_;
+    int tipo_;
 
     //Usuario();
 
@@ -42,7 +46,7 @@ private:
     string seleccionaUsuario();
 };
 
-class AdministradorMaq{
+class AdministradorMaq: public Administrador{
 private:
     bool creaMaquina(string nombre, float recursos);
     bool actualizaMaquina(string nombre, float nuevoRecurso);
