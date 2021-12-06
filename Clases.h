@@ -34,7 +34,7 @@ protected:
     bool ActualizarReserva(string nickReservado, string fechaNueva);
 };
 
-class AdministradorUsu{
+class AdministradorUsu: public Administrador{
 private:
     bool creaUsuario(string nick, string nombrecompleto, string password, string edad, string tipo);
     bool actualizaUsuario(string ncik);
