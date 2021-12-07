@@ -32,24 +32,6 @@ bool Usuario::comprueba_login(){
 
     while(fichero >> aux.nick && encontrado == false){
          fichero >> aux.password >> aux.nombrecompleto >> aux.email >> aux.tipo;
-        /*
-        getline(fichero, aux.nick, ';');
-        getline(fichero, aux.password, ';');
-        getline(fichero, aux.nombrecompleto, ';');
-        getline(fichero, aux.email, ';');
-        fichero >> aux.tipo;*/
-
-cout << endl;
-cout << "Nick -> <" << nick_ << ">" << endl;
-cout << "Password -> " << password_ << endl;
-cout << endl;
-cout << "aux.Nick -> <" << aux.nick << ">" << endl;
-cout << "aux.Password -> " << aux.password << endl;
-cout << "aux.Nombre Completo -> " << aux.nombrecompleto << endl;
-cout << "aux.Email -> " << aux.email << endl;
-cout << "aux.Tipo -> " << aux.tipo << endl;
-cout << endl;
-
 
         if(nick_ == aux.nick && password_ == aux.password){ 
             encontrado = true; 
@@ -64,9 +46,6 @@ cout << endl;
     if(encontrado == false){
         cout << "El usuario no se encuentra en la base de datos. Contacte con el administrador 1 para que registre." << endl;
     }
-cout << endl;
-cout << "Encontrado -> " << encontrado << endl;
-cout << endl;
 
     fichero.close();
     return encontrado;
@@ -75,9 +54,9 @@ cout << endl;
 void Usuario::imprimeDatos(){
     cout << "Nick -> " << nick_ << endl;
     cout << "Password -> " << password_ << endl;
-    //cout << "Nombre Completo -> " << nombrecompleto_ << endl;
-    //cout << "Email -> " << email_ << endl;
-   // cout << "Tipo -> " << tipo_ << endl;
+    cout << "Nombre Completo -> " << nombrecompleto_ << endl;
+    cout << "Email -> " << email_ << endl;
+    cout << "Tipo -> " << tipo_ << endl;
 }
 
 void AdministradorUsu::creaUsuario(){
