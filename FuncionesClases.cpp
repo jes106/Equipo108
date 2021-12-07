@@ -30,11 +30,14 @@ bool Usuario::comprueba_login(){
         exit(-1);
     }
 
-    while(getline(fichero, aux.nick, ';') && encontrado == false){
+    while(fichero >> aux.nick && encontrado == false){
+         fichero >> aux.password >> aux.nombrecompleto >> aux.email >> aux.tipo;
+        /*
+        getline(fichero, aux.nick, ';');
         getline(fichero, aux.password, ';');
         getline(fichero, aux.nombrecompleto, ';');
         getline(fichero, aux.email, ';');
-        fichero >> aux.tipo;
+        fichero >> aux.tipo;*/
 
 cout << endl;
 cout << "Nick -> <" << nick_ << ">" << endl;
@@ -55,6 +58,7 @@ cout << endl;
             tipo_ = aux.tipo;
         }
         else{ encontrado = 0;}
+
     }
 
     if(encontrado == false){
@@ -63,6 +67,8 @@ cout << endl;
 cout << endl;
 cout << "Encontrado -> " << encontrado << endl;
 cout << endl;
+
+    fichero.close();
     return encontrado;
 }
 
@@ -91,9 +97,10 @@ void AdministradorUsu::creaUsuario(){
         getline(cin, nombre, '\n');
         cout << "Introduce el email -> ";
         getline(cin, email);
-        cout << "Tipos de Usuario:\n\tAdminitrador 1 = 1\n\tAdministrador 2 = 2\n\tUsuario = 3" << endl;
+        cout << "Tipos de Usuario:\n\tAdminitrador de Usuarios = 1\n\tAdministrador de Maquinas = 2\n\tUsuario = 3" << endl;
         cout << "Introduce el tipo de usuario -> ";
         cin >> tipo;
+        cin.ignore();
         aux.setnombrecompleto(nombre);
         aux.setemail(email);
         aux.settipo(tipo);
@@ -104,7 +111,7 @@ void AdministradorUsu::creaUsuario(){
             exit(-1);
         }
 
-        fichero << aux.getnick() << ";" << aux.getpassword() << ";" << aux.getnombrecompleto() << ";" << aux.getemail() << ";" << aux.gettipo() << "\n";
+        fichero << "\n" << aux.getnick() << " " << aux.getpassword() << " " << aux.getnombrecompleto() << " " << aux.getemail() << " " << aux.gettipo();
         cout << "Usuario añadido con exito." << endl;
     }else{
         cout << "El usuario ya se encuentra en la base de datos." << endl;
