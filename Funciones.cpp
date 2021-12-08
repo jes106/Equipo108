@@ -58,6 +58,7 @@ void crearUsuario(){
 }
 */
 int menuAdmin1(){
+    cout << endl;
     cout << "0. Cerrar Sesion." << endl;
     cout << "1. Crear Usuario." << endl;
     cout << "2. Actualizar Usuarios." << endl;
@@ -70,6 +71,7 @@ int menuAdmin1(){
     return x;
 }
 int menuAdmin2(){
+    cout << endl;
     cout << "0. Cerrar Sesion." << endl;
     cout << "1. Añadir Maquina." << endl;
     cout << "2. Actualizar Maquinas." << endl;
@@ -87,6 +89,7 @@ int menuAdmin2(){
     return x;
 }
 int menuUsuario(){
+    cout << endl;
     cout << "0. Cerrar Sesion." << endl;
     cout << "1. Crear Reserva." << endl;
     cout << "2. Actualizar Reserva." << endl;
@@ -102,10 +105,18 @@ int menuUsuario(){
     return x;    
 }
 
-
-
-void actualizaUsuario(){
-
+void menuActualizaUsu(){
+    cout << endl;
+    cout << "1. Modificar Datos Usuario." << endl;
+    cout << "2. Eliminar Usuario." << endl;
+}
+void menuModifica(){
+    cout << "\t ¿Que datos desea modificar? " << endl;
+    cout << "\t 1. Nick." << endl;
+    cout << "\t 2. Password." << endl;
+    cout << "\t 3. Nombre Compelto." << endl;
+    cout << "\t 4. Email." << endl;
+    cout << "\t 5. Tipo de Usuario." << endl;
 }
 
 

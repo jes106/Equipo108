@@ -23,7 +23,11 @@ int menuAdmin1();
 int menuAdmin2();
 int menuUsuario();
 
+void menuActualizaUsu();
+void menuModifica();
+
+
 //void crearUsuario();
-void actualizaUsuario();
+//void actualizaUsuario();
 
 #endif
