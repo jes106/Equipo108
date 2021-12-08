@@ -10,6 +10,13 @@ public:
     void identificar_usuario();                                             //Funciones modificadas
     bool comprueba_login();
     void imprimeDatos();
+
+    void eliminaUsuario();                                                 //Funciones añadidas por cuenta propia
+    bool busca_login();
+    void modificaUsuario();
+    void modificaUsuarioFichero();      //Funcion para modificar el usuario en el fichero
+
+
     inline string getnick(){ return nick_; }
     inline void setnick(string nick){ nick_ = nick; }
     inline string getpassword(){ return password_; }
@@ -41,9 +48,9 @@ protected:
 class AdministradorUsu: public Administrador{
 public:
     void creaUsuario();                                                         //Funciones Modificadas
+    bool actualizaUsuario();
 
     //bool creaUsuario(string nick, string nombrecompleto, string password, string edad, string tipo);
-    bool actualizaUsuario(string ncik);
     //bool comprueba_login(string nick);                                        La introduzco en la clase Usuario
     string seleccionaUsuario();
 };
