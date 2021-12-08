@@ -46,13 +46,15 @@ int main(){
             }
         }
 
-        //Una vez que el usuario ha accedido al sistema se le mostrara un menu personalizado en funcion del tipo de usuario
-        if(cliente.gettipo() == 1){ opcion = menuAdmin1(); }
-        else if(cliente.gettipo() == 2){ opcion = menuAdmin2(); }
-        else if(cliente.gettipo() == 3){ opcion = menuUsuario(); }
+        encontrado = false;                                         //Necesario para que entre en el while
 
+        while(opcion>=0 && opcion<=8 && encontrado == false){
 
-        if(opcion>=0 && opcion<=8){
+            //Una vez que el usuario ha accedido al sistema se le mostrara un menu personalizado en funcion del tipo de usuario
+            if(cliente.gettipo() == 1){ opcion = menuAdmin1(); }
+            else if(cliente.gettipo() == 2){ opcion = menuAdmin2(); }
+            else if(cliente.gettipo() == 3){ opcion = menuUsuario(); }
+
             switch (opcion){
             case 0:
                 encontrado = true;
@@ -62,7 +64,7 @@ int main(){
                 encontrado = false;
                 break;
             case 2:
-                actualizaUsuario();
+                AdminU.actualizaUsuario();
                 encontrado = false;
                 break;
             /*case 3:
