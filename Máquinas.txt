@@ -1,4 +1,0 @@
-001 Maquina1 8 16
-002 Maquina2 32 64
-003 Maquina3 16 32
-004 Maquina4 4 12
