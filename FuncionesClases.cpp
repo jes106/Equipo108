@@ -4,6 +4,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include "Funciones.h"
 using namespace std;
 
@@ -293,7 +294,60 @@ bool AdministradorUsu::actualizaUsuario(){
     return encontrado;
 }
 
+bool Reservas::creaReserva(string nick){
+    //Definimos las variables
+    Reservation reserv;
+    Reservation reserv_file;
+    Machine maqaux;
+    vector <Machine> vmaq; //Creamos un vector que ira almacenando las maquinas leidad
+    bool disponible = false;    //Nos indicara si la maquina leida esta disponible o no
 
+    //En primer lugar pedimos al usuario que introduzca los datos de la reserva.
+    cout << "Introduce los siguientes datos para realizar la reserva: " << endl;
+    cout << "Fecha Inicio (dd/mm/aaaa) -> ";
+    getline(cin, reserv.fechaini);
+    cout << "Fecha Fin (dd/mm/aaaa) -> ";
+    getline(cin, reserv.fechafin);
+    cout << "Nucleos a reservar -> ";
+    cin >> reserv.nucleos;
+    cout << "RAM a reservar -> ";
+    cin >> reserv.ram;
+    cin.ignore();
+
+    //Ahora abriremos el fichero de maquina y mostraremos una lista de que maquinas estan disponibles con esos recursos. Tambien abriremos
+    //el fichero reserva y comprobaremos que en dicha fecha no este la maquina reservada
+    //Abrimos los dos ficheros
+    fstream filemaq("Maquinas.txt", ios::in);
+    fstream fileres("Reservas.txt", ios::in);
+    if(!filemaq || !fileres){
+        cout << "Error al abrir algunos de los ficheros." << endl;
+        exit(-1);
+    }
+    //Primero obtenemos las máquinas disponibles para los recursos introducidos.
+    while(filemaq >> maqaux.id){
+        filemaq >> maqaux.nombre >> maqaux.nucleos >> maqaux.ram;
+        //Comprobamos que la maquina leida tenga los recursos disponibles pedido por el usuario
+        if(reserv.nucleos <= maqaux.nucleos && reserv.ram <= maqaux.ram){
+            disponible = true;
+        }
+
+        //Procedemos a ir leyendo el fichero reservas y vamos comprobando las fechas de las reservas
+        while(fileres >> reserv_file.id && disponible == true){     //Tenemos que saber si la maquina leida anteriormente cumple los requisitos
+                                                                    //de nucleos y ram, para no hacer una lectura para nada. 
+            fileres >> reserv_file.fechaini >> reserv_file.fechafin >> reserv_file.nucleos >> reserv_file.ram;
+            //Una vez leida la reserva del fichero tenemos que comprobar la fecha.
+            if(cumpruebaFecha(reserv_file.fechaini, reserv_file.fechafin, reserv.fechaini, reserv.fechafin) == true){
+                
+            }
+    }
+    }
+
+
+
+    //Cerramos los ficheros
+    filemaq.close();
+    fileres.close();
+}
 
 
 
