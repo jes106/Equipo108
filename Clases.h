@@ -11,6 +11,8 @@ public:
     bool comprueba_login();
     void imprimeDatos();
 
+
+
     void eliminaUsuario();                                                 //Funciones añadidas por cuenta propia
     bool busca_login();
     void modificaUsuario();
@@ -63,16 +65,33 @@ private:
 };
 
 class Maquinas{
+public:
+    inline string getid(){return id_;}
+    inline void setid(string id){ id_ = id; }
+    inline string getnombre(){ return nombre_; }
+    inline void setnombre(string nombre){ nombre_ = nombre; }
+    inline int getnucleos(){ return nucleos_; }
+    inline void setnucleos(int nucleos){ nucleos_ = nucleos; }
+    inline int getram(){ return ram_; }
+    inline void setram(int ram){ ram_ = ram; }
+    
 private:
+    string id_;
+    string nombre_;
+    int nucleos_;
+    int ram_;
+    /*
     string nombre;
     float recursos;
+    */
 };
 
 class Reservas{
+public:
+    bool creaReserva(string nick);
 private:
     string fechanueva;
 
-    bool creaReserva(string nick, string fechaNueva);
-    bool actualizaReserva(string login, string fechaNueva);
+        bool actualizaReserva(string login, string fechaNueva);
     string introducir_fecha();
 };
