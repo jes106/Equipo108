@@ -119,7 +119,13 @@ void menuModifica(){
     cout << "\t 5. Tipo de Usuario." << endl;
 }
 
-
+bool cumpruebaFecha(string FFI, string FFN, string UFI, string UFN){
+    /* SIGNIFICADO DE PARAMETROS */
+    // - FFI -> Fecha inicio leida del fichero
+    // - FFN -> Fecha fin leida del fichero
+    // - UFI -> Fecha inicio del usuario
+    // - UFN -> Fecha fin del usuario
+}
 
 
 

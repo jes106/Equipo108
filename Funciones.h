@@ -16,6 +16,21 @@ struct Users
     int tipo;                //Indicara el tipo de usuario que es [Administrador1] = 1  [Administrador2] = 2   [Usuario] = 3
 };
 
+struct Reservation{
+    string id;
+    string fechaini;
+    string fechafin;
+    int nucleos;
+    int ram;
+};
+
+struct Machine{
+    string id;
+    string nombre;
+    int nucleos;
+    int ram;
+};
+
 
 //bool comprueba_login(Users *users);
 
@@ -26,6 +41,7 @@ int menuUsuario();
 void menuActualizaUsu();
 void menuModifica();
 
+bool cumpruebaFecha(string FFI, string FFN, string UFI, string UFN);
 
 //void crearUsuario();
 //void actualizaUsuario();
