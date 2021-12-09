@@ -15,6 +15,7 @@ int main(){
     Usuario cliente;
     AdministradorUsu AdminU;
     AdministradorMaq AdminM;
+    Reservas aux;
 
 
 
@@ -78,11 +79,11 @@ int main(){
                 break;
             case 6:
                 actualizaReserva();
-                break;
+                break;*/
             case 7:
-                crearReserva();
+                aux.creaReserva(cliente.getnick());
                 break;
-            case 8:
+        /*    case 8:
                 actualizaReserva();
                 break;*/
             }
