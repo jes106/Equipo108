@@ -350,6 +350,73 @@ bool Reservas::creaReserva(string nick){
 }
 
 
+bool AdministradorMaq::actualizaMaquina(string nombre, char nuevosnucleos[1000]='0', char nuevaram[1000]='0'){
+
+	int opcion;
+	cout<<"Introduzca la opción que va a querer realizar: 1 (actualizar) o 2 (eliminar)"<<endl;
+	cin<<opcion;
+
+	if(opcion==1){
+
+		char aux[1000], aux2[1000],aux3[1000],aux4[1000];
+		ifstream f("Máquinas.txt");
+		//Creamos un fichero auxiliar al que ir moviendo los datos del original
+		ofstream f2("AuxMaq.txt");
+		while(f.getline(aux,1000,' ')){
+			f.getline(aux2,1000,' ');
+			f.getline(aux3,1000,' ');
+			f.getline(aux4, 1000, '\n');
+			//Si el nombre de máquina es igual al buscado cambiamos sus núcleos y su ram
+			if(aux2==nombre){
+				aux3=nuevosnucleos;
+				aux4=nuevaram;
+			}
+			f2<<aux<<' '<<aux2<<' '<<aux3<<' '<<aux4<<'\n';
+
+
+
+		}
+		//Eliminamos el antiguo fichero Máquinas y renombramos el nuevo
+		remove("Máquinas.txt");
+		raname("AuxMaq.txt","Máquinas.txt");
+
+
+
+	}
+
+	if(opcion==2){
+
+		char aux[1000], aux2[1000],aux3[1000],aux4[1000];
+		ifstream f("Máquinas.txt");
+		//Creamos un fichero auxiliar al que ir moviendo los datos del original
+		ofstream f2("AuxMaq.txt");
+		while(f.getline(aux,1000,' ')){
+			f.getline(aux2,1000,' ');
+			f.getline(aux3,1000,' ');
+			f.getline(aux4, 1000, '\n');
+			//Si el nombre de máquina es igual al buscado no lo metemos en el nuevo fichero si no si y eliminamos los recursos asociados a esta
+			if(aux2==nombre){
+				bool eliminaReservasMaquinaEliminada(nombre);
+				//IMPLEMENTAR ESTA FUNCIÓN
+
+			}
+
+			else{
+			f2<<aux<<' '<<aux2<<' '<<aux3<<' '<<aux4<<'\n';
+			}
+
+
+
+		}
+		//Eliminamos el antiguo fichero Máquinas y renombramos el nuevo
+		remove("Máquinas.txt");
+		raname("AuxMaq.txt","Máquinas.txt");
+
+
+	}
+	}
+
+
 
 
 
