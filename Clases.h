@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <cstring>
 #include <iostream>
+#include "Funciones.h"
 
 using namespace std;
 
@@ -58,9 +59,11 @@ public:
 };
 
 class AdministradorMaq: public Administrador{
+public:
+    bool actualizaMaquina();
 private:
     bool creaMaquina(string nombre, float recursos);
-    bool actualizaMaquina(string nombre, float nuevoRecurso);
+    //bool actualizaMaquina(string nombre, float nuevoRecurso);
     bool comprueba_maquina(string nombre);
 };
 
@@ -70,25 +73,37 @@ public:
     inline void setid(string id){ id_ = id; }
     inline string getnombre(){ return nombre_; }
     inline void setnombre(string nombre){ nombre_ = nombre; }
+    inline string getnick(){ return nick_; }
+    inline void setnick(string nick){ nick_ = nick; }
     inline int getnucleos(){ return nucleos_; }
     inline void setnucleos(int nucleos){ nucleos_ = nucleos; }
     inline int getram(){ return ram_; }
     inline void setram(int ram){ ram_ = ram; }
+    inline int getnucleoslib(){ return nucleoslib_; }
+    inline void setnucleoslib(int nucleos){ nucleoslib_ = nucleos; }
+    inline int getramlib(){ return ramlib_; }
+    inline void setramlib(int ram){ ramlib_ = ram; }
+
+    void modificaMaquina();
+    void eliminaMaquina();
+    void modificaMaquinaFichero();
     
 private:
     string id_;
     string nombre_;
+    string nick_;
+    string fechaini_;
+    string fechafin_;
     int nucleos_;
     int ram_;
-    /*
-    string nombre;
-    float recursos;
-    */
+    int nucleoslib_;
+    int ramlib_;
 };
 
 class Reservas{
 public:
     bool creaReserva(string nick);
+    void escribeReserva(Reservation maqaux);
 private:
     string fechanueva;
 

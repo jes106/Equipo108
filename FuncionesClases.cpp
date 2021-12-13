@@ -1,5 +1,4 @@
 #include "Clases.h"
-#include "Funciones.h"
 
 #include <cstring>
 #include <iostream>
@@ -216,6 +215,8 @@ void Usuario::modificaUsuarioFichero(){
     rename("template.txt", "BASE_DE_DATOS.txt");
 }
 
+
+
 void AdministradorUsu::creaUsuario(){
     string nombre, email;
     int tipo;
@@ -294,62 +295,294 @@ bool AdministradorUsu::actualizaUsuario(){
     return encontrado;
 }
 
+bool AdministradorMaq::actualizaMaquina(){
+    bool encontrado;                                //Funcion que servira para saber si el usuario se encuentra en la base de datos y posteriormente
+                                                    //para saber si se ha actualizado correctamente
+    int opcion;
+
+    Machine maqlec;
+    Maquinas maqaux;
+
+    //En primer lugar mostraremos una lista de todas las maquinas que ahy disponibles.
+    //Abrimos el fichero 'Maquinas.txt'
+    fstream filemaq("Máquinas.txt", ios::in);
+    if(!filemaq){
+        cout << "Error al abrir el fichero 'Máquinas.txt'" << endl;
+        exit(-1);
+    }
+
+    cout << "Lista de maquinas en el fichero: " << endl;
+    cout << "|ID|Nombre Maq|Nucleos|RAM|Nucleos Lib|RAM lib|" << endl;
+    while(filemaq >> maqlec.id){
+        filemaq >> maqlec.nombre >> maqlec.nucleos >> maqlec.ram >> maqlec.nucleoslibres >> maqlec.ramlibre;
+        cout << maqlec.id << "\t" << maqlec.nombre << "\t" << maqlec.nucleos << "\t" << maqlec.ram << "\t" << maqlec.nucleoslibres << "\t" << maqlec.ramlibre << endl;
+    }
+    filemaq.close();
+    cout << endl;
+    cout << "Introduce el ID de la maquina a actualizar:" << endl;
+    cout << "ID -> ";
+    string id;
+    getline(cin, id);
+    maqaux.setid(id);
+
+    //Procedemos a encontrar la maquina seleccionada en el fichero y guardar los datos
+    filemaq.seekg(ios::beg);             //Establecemos el cursor al principio del fichero
+    while(filemaq >> maqlec.id){
+        filemaq >> maqlec.nombre >> maqlec.nucleos >> maqlec.ram >> maqlec.nucleoslibres >> maqlec.ramlibre;
+
+        if(maqlec.id == maqaux.getid()){
+            maqaux.setid(maqlec.id);
+            maqaux.setnombre(maqlec.nombre);
+            maqaux.setnucleos(maqlec.nucleos);
+            maqaux.setram(maqlec.ram);
+            maqaux.setnucleoslib(maqlec.nucleoslibres);
+            maqaux.setramlib(maqlec.ramlibre);
+cout << "ID -> " << maqaux.getid() << endl;
+cout << "Nombre -> " << maqaux.getnombre() << endl;
+cout << "Nucleos -> " << maqaux.getnucleos() << endl;
+cout << "RAM -> " << maqaux.getram() << endl;
+cout << "Nucleos Libres -> " << maqaux.getnucleoslib() << endl;
+cout << "RAM Libre -> " << maqaux.getramlib() << endl;
+        }  
+    }
+
+    if(encontrado == true){
+        menuActualizaMaq();
+        cout << "Elige una opcion -> ";
+        cin >> opcion;
+        cin.ignore();
+    }
+
+    if(opcion == 1){
+        maqaux.modificaMaquina();
+    }
+    if(opcion == 2){
+        maqaux.eliminaMaquina();
+    }
+
+    return encontrado;
+}
+
+
+
+void Maquinas::modificaMaquina(){
+    int opcion;
+    bool encontrado = true;
+    //string nick_aux;
+    menuModificaMaq();
+    cout << "\t Elige -> ";
+    cin >> opcion;
+    cin.ignore();
+    switch (opcion){            //Falta realizar el cambio en el fichero.
+        case 1:{                            //La razon de utiluzar llaves en el switch es debido a que creo variables en los casos.
+            string nombre;
+            cout << "Introduce el nuevo nombre -> ";
+            getline(cin, nombre);
+            setnombre(nombre);
+            break;
+        }
+
+        case 2:{
+            int nucleos, xnucleos;
+            cout << "Introduce los nuevos nucleos -> ";
+            cin >> nucleos;
+            cin.ignore();
+            //Tenemos que comprobar que se puede realizar la modificacion de los nucleos
+            xnucleos = getnucleos() - nucleos;
+            if(xnucleos > 0){       //NucleosNuevos < NucleosAntiguios
+                if(xnucleos > getnucleoslib()){ cout << "No se puede realizar la modificacion puesto que se van a eliminar nucleos que estan siendo usados." << endl; }
+                else{ 
+                    setnucleos(nucleos);
+                    setnucleoslib(nucleoslib_ - nucleos);
+                }
+            }
+            if(xnucleos < 0){       //NucleosNuevos > NucleosAntiguios
+                xnucleos = abs(xnucleos);
+                setnucleos(nucleos);
+                setnucleoslib(nucleoslib_ + nucleos);
+            }
+            break;
+        }
+        case 3:{
+            int ram, xram;
+            cout << "Introduce la nueva ram -> ";
+            cin >> ram;
+            cin.ignore();
+            //Tenemos que comprobar que se puede realizar la modificacion de los nucleos
+            xram = getram() - ram;
+            if(xram > 0){       //NucleosNuevos < NucleosAntiguios
+                if(xram > getnucleoslib()){ cout << "No se puede realizar la modificacion puesto que se van a eliminar nucleos que estan siendo usados." << endl; }
+                else{ 
+                    setram(ram);
+                    setramlib(nucleoslib_ - ram);
+                }
+            }
+            if(xram < 0){       //NucleosNuevos > NucleosAntiguios
+                xram = abs(xram);
+                setram(xram);
+                setramlib(ramlib_ + xram);
+            }
+            break;
+        }
+    }
+
+    modificaMaquinaFichero();
+    cout << "Maquina modificada con exito" << endl;
+    
+}
+
+void Maquinas::eliminaMaquina(){
+    //El procedimiento sera buscar en el fichero el id de la maquina a eliminar.
+    string filename = "Máquinas.txt";
+    fstream fichero(filename, ios::in);
+    fstream temporal("template.txt", ios::out);
+    if(!fichero || !temporal){
+        cout << "El fichero no se ha podido abrir." << endl;
+        exit(-1);
+    }
+
+    Machine aux;
+
+    while(fichero >> aux.id){
+        fichero >> aux.nombre >> aux.nucleos >> aux.ram >> aux.nucleoslibres >> aux.ramlibre;
+        if(aux.id != id_){
+            temporal << aux.id << " " << aux.nombre << " " << aux.nucleos << " " << aux.ram << " " << aux.nucleoslibres << aux.ramlibre << endl;
+        }
+    }
+
+    fichero.close();
+    temporal.close();
+    remove("Máquinas.txt");
+    rename("template.txt", "Máquinas.txt");
+}
+
+void Maquinas::modificaMaquinaFichero(){
+    //Esta funcion leera el fichero y lo ira almacenando en otro temporal, pero cuando se encuentre con el id que se desea modificar,
+    //se guardara la nueva informacion en el fichero tempora. Finalmente eliminaremos el fichero original y al temporal le daremos el 
+    //nombre del fichero original
+
+    //Creamos las variables oportunas.
+    Machine aux;        //Donde se almacenara los datos leidos del fichero que posteriormente se compararan con los de la clase.
+    bool encontrado;    //Variable que nos indicara si un usuario esta o no en la base de datos
+
+    //Abrimos el fichero
+    fstream fichero("Máquinas.txt", ios::in);   //Abrimos el fichero original en modo lectura
+    fstream temporal("template.txt", ios::out);      //Abrimos el fichero temporal en modo escritura
+    if(!fichero || !temporal){       //Comprobamos que los dos ficheros han sido abiertos correctamente
+        cout << "Los ficheros no se han abierto correctamente." << endl;
+        exit(-1);
+    }
+
+    while(fichero >> aux.id){
+        fichero >> aux.nombre >> aux.nucleos >> aux.ram >> aux.nucleoslibres >> aux.ramlibre;
+        if(aux.id == id_){
+
+            temporal << id_ << " " << nombre_ << " " << nucleos_ << " " << ram_ << " " << nucleoslib_ << ramlib_ << endl;
+        }else{
+            temporal << aux.id << " " << aux.nombre << " " << aux.nucleos << " " << aux.ram << " " << aux.nucleoslibres << aux.ramlibre << endl;
+        }
+    }
+
+    fichero.close();
+    temporal.close();
+    remove("Máquinas.txt");
+    rename("template.txt", "Máquinas.txt");
+}
+
+
+
 bool Reservas::creaReserva(string nick){
     //Definimos las variables
     Reservation reserv;
-    Reservation reserv_file;
     Machine maqaux;
     vector <Machine> vmaq; //Creamos un vector que ira almacenando las maquinas leidad
     bool disponible = false;    //Nos indicara si la maquina leida esta disponible o no
 
-    //En primer lugar pedimos al usuario que introduzca los datos de la reserva.
-    cout << "Introduce los siguientes datos para realizar la reserva: " << endl;
-    cout << "Fecha Inicio (dd/mm/aaaa) -> ";
-    getline(cin, reserv.fechaini);
-    cout << "Fecha Fin (dd/mm/aaaa) -> ";
-    getline(cin, reserv.fechafin);
-    cout << "Nucleos a reservar -> ";
-    cin >> reserv.nucleos;
-    cout << "RAM a reservar -> ";
-    cin >> reserv.ram;
-    cin.ignore();
 
-    //Ahora abriremos el fichero de maquina y mostraremos una lista de que maquinas estan disponibles con esos recursos. Tambien abriremos
-    //el fichero reserva y comprobaremos que en dicha fecha no este la maquina reservada
+    //Asignamos el nick pasado como parametro a la clase
+    reserv.nick = nick;
+
+    //Abrimos el fichero 'Maquinas.txt para posteriormente leerlo y obtener una lista de que maquinas estan disponibles con esos recursos. 
     //Abrimos los dos ficheros
-    fstream filemaq("Maquinas.txt", ios::in);
-    fstream fileres("Reservas.txt", ios::in);
-    if(!filemaq || !fileres){
-        cout << "Error al abrir algunos de los ficheros." << endl;
+    fstream filemaq("Máquinas.txt", ios::in);       //Fichero que contiene la lista de máquinas
+    if(!filemaq){
+        cout << "Error al abrir el fichero 'maquinas.txt'." << endl;
         exit(-1);
     }
-    //Primero obtenemos las máquinas disponibles para los recursos introducidos.
-    while(filemaq >> maqaux.id){
-        filemaq >> maqaux.nombre >> maqaux.nucleos >> maqaux.ram;
-        //Comprobamos que la maquina leida tenga los recursos disponibles pedido por el usuario
-        if(reserv.nucleos <= maqaux.nucleos && reserv.ram <= maqaux.ram){
-            disponible = true;
-        }
 
-        //Procedemos a ir leyendo el fichero reservas y vamos comprobando las fechas de las reservas
-        while(fileres >> reserv_file.id && disponible == true){     //Tenemos que saber si la maquina leida anteriormente cumple los requisitos
-                                                                    //de nucleos y ram, para no hacer una lectura para nada. 
-            fileres >> reserv_file.fechaini >> reserv_file.fechafin >> reserv_file.nucleos >> reserv_file.ram;
-            //Una vez leida la reserva del fichero tenemos que comprobar la fecha.
-            if(cumpruebaFecha(reserv_file.fechaini, reserv_file.fechafin, reserv.fechaini, reserv.fechafin) == true){
-                
+    while(disponible == false){
+        //En primer lugar pedimos al usuario que introduzca los datos de la reserva.
+        cout << endl << "Introduce los siguientes datos para realizar la reserva: " << endl;
+        cout << "Fecha Inicio (dd/mm/aaaa) -> ";
+        getline(cin, reserv.fechaini);
+        cout << "Fecha Fin (dd/mm/aaaa) -> ";
+        getline(cin, reserv.fechafin);
+        cout << "Nucleos a reservar -> ";
+        cin >> reserv.nucleos;
+        cout << "RAM a reservar -> ";
+        cin >> reserv.ram;
+        cin.ignore();
+
+        
+        //Comenzamos a leer el fichero 'Maquinas.txt'
+        //Primero obtenemos las máquinas disponibles para los recursos introducidos.
+        while(filemaq >> maqaux.id){
+            filemaq >> maqaux.nombre >> maqaux.nucleos >> maqaux.ram >> maqaux.nucleoslibres >> maqaux.ramlibre;
+            //Comprobamos que la maquina leida tenga los recursos disponibles pedido por el usuario
+            if(reserv.nucleos <= maqaux.nucleoslibres && reserv.ram <= maqaux.ramlibre){
+                //ME QUEDO AQUI!!!! NO ES NECESARIO COMPROBAR LA FECHA YA QUE CUANDO HACEMOS UNA RESERVA DIRECCTAMENTE ACTUALIZAMOS LOS NUCLEOS Y RAM DISPONIBLE EN EL FICHERO MAQUINAS
+                vmaq.push_back(maqaux);
+                disponible = true;
             }
+        }
+        if(disponible == false){ cout << "No se ha encontrado nunguna maquina que tenga libre los recursos elegido. Por favor escoja otra." << endl; }
     }
+    //Una vez leidas todas las maquinas que esta disponibles y almacenadas en el vector, se las mostramos al usuario para que elija.
+    cout << endl;                                                   //Estetica
+    muestraListaMaquinas(vmaq);
+
+    //Pedimos al usuario que introduca el id de la maquina que desea utilizar
+    cout << "Introuce el id de la máquina a reservar: ";
+    getline(cin, reserv.id);
+
+    //Obtenemos el nombre de la maquina a partir del id.
+    for(const auto &i: vmaq){
+        if(i.id == reserv.id){ reserv.nombre = i.nombre; }
     }
 
+    //Escribimos en el fichero de reserva la reserva realizada.
+    escribeReserva(reserv);
+    cout << "Reserva realizada con exito." << endl;
 
-
-    //Cerramos los ficheros
+    //Cerramos el fichero
     filemaq.close();
-    fileres.close();
+
+    //Ahora debemos abrir nuestro fichero "maquinas.txt" y actualziar los nucleos y la ram disponible. 
+    //Para ello debemos crear un fichero temporal en el que iremos guardando linea a linea del fichero "maquinas.txt" y modificaremos
+    //aquellas que lo necesiten
+    actualizaMaquinas(reserv.id, reserv.nombre, reserv.nucleos, reserv.ram);
+
+    return true;
 }
 
+void Reservas::escribeReserva(Reservation reserv){
+    //En esta funcion procederemos a abrir el fichero de reservas en modo lectura con el cursor al final (ios::app) e insertaremos todos los
+    //datos de la estructura pasada como parametro en el siguiente orden.
+    //<nick>    <id>    <nombre>    <fecha_inicio>    <fecha_fin>    <nucleos>    <ram> 
 
+    //Abrimos el fichero 
+    fstream file("Reservas.txt", ios::app);
+    if(!file){
+        cout << "No se ha podido abrir el fichero 'reservas.txt' " << endl;
+        exit(-1);
+    }
+
+    //Procedemos a escribir los datos en el fichero
+    file << reserv.nick << " " << reserv.id << " " << reserv.nombre << " " << reserv.fechaini << " " << reserv.fechafin << " " << reserv.nucleos << " " << reserv.ram << endl;
+
+
+    file.close();
+}
 
 
 
