@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <cstdlib>
 #include <string>
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -17,7 +18,9 @@ struct Users
 };
 
 struct Reservation{
+    string nick;
     string id;
+    string nombre;
     string fechaini;
     string fechafin;
     int nucleos;
@@ -28,7 +31,9 @@ struct Machine{
     string id;
     string nombre;
     int nucleos;
+    int nucleoslibres;
     int ram;
+    int ramlibre;
 };
 
 
@@ -41,7 +46,12 @@ int menuUsuario();
 void menuActualizaUsu();
 void menuModifica();
 
-bool cumpruebaFecha(string FFI, string FFN, string UFI, string UFN);
+void muestraListaMaquinas(vector <Machine> vmaq);
+void actualizaMaquinas(string id, string nombre, int nucleos, int ram);
+
+void menuActualizaMaq();
+void menuModificaMaq();
+
 
 //void crearUsuario();
 //void actualizaUsuario();
