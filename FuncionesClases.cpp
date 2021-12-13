@@ -576,8 +576,6 @@ void Reservas::escribeReserva(Reservation reserv){
         cout << "No se ha podido abrir el fichero 'reservas.txt' " << endl;
         exit(-1);
     }
-/*
-<<<<<<< HEAD
     //Procedemos a escribir los datos en el fichero
     file << reserv.nick << " " << reserv.id << " " << reserv.nombre << " " << reserv.fechaini << " " << reserv.fechafin << " " << reserv.nucleos << " " << reserv.ram << endl;
 
@@ -585,7 +583,7 @@ void Reservas::escribeReserva(Reservation reserv){
     file.close();
 }
 
-
+/*
 bool AdministradorMaq::actualizaMaquina(string nombre, char nuevosnucleos[1000]='0', char nuevaram[1000]='0'){
 
 	int opcion;
