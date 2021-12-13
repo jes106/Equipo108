@@ -73,11 +73,11 @@ int main(){
                 break;
             case 4:
                 addMaquina();
-                break;
+                break;*/
             case 5:
-                actualizaMaquina();
+                AdminM.actualizaMaquina();
                 break;
-            case 6:
+           /* case 6:
                 actualizaReserva();
                 break;*/
             case 7:
