@@ -295,6 +295,8 @@ bool AdministradorUsu::actualizaUsuario(){
     return encontrado;
 }
 
+
+
 bool AdministradorMaq::actualizaMaquina(){
     bool encontrado;                                //Funcion que servira para saber si el usuario se encuentra en la base de datos y posteriormente
                                                     //para saber si se ha actualizado correctamente
@@ -311,6 +313,7 @@ bool AdministradorMaq::actualizaMaquina(){
         exit(-1);
     }
 
+    cout << endl;
     cout << "Lista de maquinas en el fichero: " << endl;
     cout << "|ID|Nombre Maq|Nucleos|RAM|Nucleos Lib|RAM lib|" << endl;
     while(filemaq >> maqlec.id){
@@ -318,17 +321,24 @@ bool AdministradorMaq::actualizaMaquina(){
         cout << maqlec.id << "\t" << maqlec.nombre << "\t" << maqlec.nucleos << "\t" << maqlec.ram << "\t" << maqlec.nucleoslibres << "\t" << maqlec.ramlibre << endl;
     }
     filemaq.close();
-    cout << endl;
+    
     cout << "Introduce el ID de la maquina a actualizar:" << endl;
     cout << "ID -> ";
     string id;
     getline(cin, id);
     maqaux.setid(id);
 
+
+    fstream file("Máquinas.txt", ios::in);
+    if(!file){
+        cout << "Error al abrir el fichero 'Máquinas.txt'" << endl;
+        exit(-1);
+    }
+
     //Procedemos a encontrar la maquina seleccionada en el fichero y guardar los datos
-    filemaq.seekg(ios::beg);             //Establecemos el cursor al principio del fichero
-    while(filemaq >> maqlec.id){
-        filemaq >> maqlec.nombre >> maqlec.nucleos >> maqlec.ram >> maqlec.nucleoslibres >> maqlec.ramlibre;
+    //filemaq.seekg(ios::beg);             //Establecemos el cursor al principio del fichero
+    while(file >> maqlec.id){
+        file >> maqlec.nombre >> maqlec.nucleos >> maqlec.ram >> maqlec.nucleoslibres >> maqlec.ramlibre;
 
         if(maqlec.id == maqaux.getid()){
             maqaux.setid(maqlec.id);
@@ -359,7 +369,7 @@ cout << "RAM Libre -> " << maqaux.getramlib() << endl;
     if(opcion == 2){
         maqaux.eliminaMaquina();
     }
-
+    file.close();
     return encontrado;
 }
 
@@ -399,7 +409,7 @@ void Maquinas::modificaMaquina(){
             if(xnucleos < 0){       //NucleosNuevos > NucleosAntiguios
                 xnucleos = abs(xnucleos);
                 setnucleos(nucleos);
-                setnucleoslib(nucleoslib_ + nucleos);
+                setnucleoslib(nucleoslib_ + xnucleos);
             }
             break;
         }
@@ -414,12 +424,12 @@ void Maquinas::modificaMaquina(){
                 if(xram > getnucleoslib()){ cout << "No se puede realizar la modificacion puesto que se van a eliminar nucleos que estan siendo usados." << endl; }
                 else{ 
                     setram(ram);
-                    setramlib(nucleoslib_ - ram);
+                    setramlib(ramlib_ - ram);
                 }
             }
             if(xram < 0){       //NucleosNuevos > NucleosAntiguios
                 xram = abs(xram);
-                setram(xram);
+                setram(ram);
                 setramlib(ramlib_ + xram);
             }
             break;
@@ -477,9 +487,9 @@ void Maquinas::modificaMaquinaFichero(){
         fichero >> aux.nombre >> aux.nucleos >> aux.ram >> aux.nucleoslibres >> aux.ramlibre;
         if(aux.id == id_){
 
-            temporal << id_ << " " << nombre_ << " " << nucleos_ << " " << ram_ << " " << nucleoslib_ << ramlib_ << endl;
+            temporal << id_ << " " << nombre_ << " " << nucleos_ << " " << ram_ << " " << nucleoslib_ << " " << ramlib_ << endl;
         }else{
-            temporal << aux.id << " " << aux.nombre << " " << aux.nucleos << " " << aux.ram << " " << aux.nucleoslibres << aux.ramlibre << endl;
+            temporal << aux.id << " " << aux.nombre << " " << aux.nucleos << " " << aux.ram << " " << aux.nucleoslibres << " " << aux.ramlibre << endl;
         }
     }
 
