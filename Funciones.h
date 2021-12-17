@@ -52,6 +52,8 @@ void actualizaMaquinas(string id, string nombre, int nucleos, int ram);
 void menuActualizaMaq();
 void menuModificaMaq();
 
+bool busca_maquina(string id);
+
 
 //void crearUsuario();
 //void actualizaUsuario();

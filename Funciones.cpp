@@ -125,7 +125,33 @@ void menuModificaMaq(){
     cout << "\t 3. RAM." << endl;
 }
 
+bool busca_maquina(string id){
+    bool encontrado = false;
+    Machine aux;
 
+    string filename = "Máquinas.txt";
+    fstream fichero(filename, ios::in);                                         //Abrimos el fichero en modo entrada(lectura)
+    if(!fichero){
+        cout << "Error al abrir el fichero" << endl;
+        exit(-1);
+    }
+
+    while(fichero >> aux.id && encontrado == false){
+         fichero >> aux.nombre >> aux.nucleos >> aux.ram >> aux.nucleoslibres >> aux.ramlibre;
+
+        if(id == aux.id){ 
+            encontrado = true;
+        }
+    }
+
+    if(encontrado == true){
+        cout << "La maquina ya esta registrada" << endl;
+    }
+
+    fichero.close();
+    return encontrado;
+
+}
 
 
 
