@@ -11,3 +11,9 @@ TEST(menuAdmin1,Testsmenus){
     EXPECT_LT(menuAdmin2(),9);
     EXPECT_LT(menuUsuario(),9);
 }
+
+TEST(AdministradorUser, CrearUsuario){
+	AdministradorUsu adminus;
+	EXPECT_EQ(true, adminus.creaUsuario());
+	
+}
