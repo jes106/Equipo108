@@ -372,7 +372,46 @@ cout << "RAM Libre -> " << maqaux.getramlib() << endl;
     file.close();
     return encontrado;
 }
+bool AdministradorMaq::creaMaquina(){
+    
+    bool encontrado = true;
+    Machine aux;
+    
 
+    while(encontrado == true){
+        //Pedimos al administrador que introduzca el login para comprobar si esta en la lista.
+        cout << endl << "Introduce los datos de la maquina:" << endl;
+        cout << "ID -> ";
+        getline(cin, aux.id);
+
+        encontrado = busca_maquina(aux.id);
+    }
+
+    if(encontrado == false){
+        cout << "Introduce el nombre -> ";
+        getline(cin, aux.nombre);
+        cout << "Introduce los nucleos -> ";
+        cin >> aux.nucleos;
+        cin.ignore();
+        cout << "Introduce la RAM -> ";
+        cin >> aux.ram;
+        cin.ignore();
+        aux.nucleoslibres = aux.nucleos;
+        aux.ramlibre = aux.ram;
+
+        fstream fichero("Máquinas.txt", ios::app);
+        if(!fichero){                                                        //Comprobamos que el fichero se ha abierto correctamente
+            cout << "ERROR. Error al abrir el fichero." << endl;
+            exit(-1);
+        }
+
+        fichero << aux.id << " " << aux.nombre << " " << aux.nucleos << " " << aux.ram << " " << aux.nucleoslibres << " " << aux.ramlibre << endl;
+        cout << "Maquina añadida con exito." << endl;
+        encontrado == true;
+    }
+
+    return encontrado;
+}
 
 
 void Maquinas::modificaMaquina(){
@@ -498,6 +537,7 @@ void Maquinas::modificaMaquinaFichero(){
     remove("Máquinas.txt");
     rename("template.txt", "Máquinas.txt");
 }
+
 
 
 

@@ -61,7 +61,7 @@ public:
 class AdministradorMaq: public Administrador{
 public:
     bool actualizaMaquina();
-    bool crearMaquina();
+    bool creaMaquina();
 private:
     //bool creaMaquina(string nombre, float recursos);
     //bool actualizaMaquina(string nombre, float nuevoRecurso);
