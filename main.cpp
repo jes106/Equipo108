@@ -70,10 +70,10 @@ int main(){
                 break;
             /*case 3:
                 actualizaReserva();
-                break;
-            case 4:
-                addMaquina();
                 break;*/
+            case 4:
+                AdminM.creaMaquina();
+                break;
             case 5:
                 AdminM.actualizaMaquina();
                 break;
