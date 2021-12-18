@@ -71,8 +71,13 @@ gtest_main.a : gtest-all.o gtest_main.o
 # gtest_main.a, depending on whether it defines its own main()
 # function.
 
-main.o : main.cpp Funciones.cpp FuncionesClases.cpp $(GTEST_HEADERS)
-	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c main.cpp
+Funciones.o : Funciones.cpp Funciones.h
 
-Equipo108 : main.o gtest_main.a
+Clases.h.gch : FuncionesClases.cpp Clases.h $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c FuncionesClases.cpp Clases.h
+
+EQ108test.o: Funciones.o Clases.h.gch EQ108_tests.cpp $(GTEST_HEADERS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c EQ108_tests.cpp
+
+EQ108_tests: EQ108_tests.o Funciones.o Clases.h.gch gtest_main.a
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $^ -o $@
