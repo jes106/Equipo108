@@ -17,3 +17,13 @@ TEST(AdministradorUser, CrearUsuario){
 	EXPECT_EQ(true, adminus.creaUsuario());
 	
 }
+
+TEST(AdministradorUser, ModificarUser){
+	AdministradorUsu adminus;
+	std::cout<<"---------------------------------"<<endl<<"PRUEBE A ACTAULIZAR i02essej"<<endl<<"---------------------------------"<<endl;
+	EXPECT_EQ(true,adminus.actualizaUsuario());
+	
+	std::cout<<"---------------------------------"<<endl<<"PRUEBE A ELIMINAR i02essej"<<endl<<"---------------------------------"<<endl;
+	EXPECT_EQ(true,adminus.actualizaUsuario());
+	
+}
