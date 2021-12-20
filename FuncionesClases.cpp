@@ -217,7 +217,7 @@ void Usuario::modificaUsuarioFichero(){
 
 
 
-void AdministradorUsu::creaUsuario(){
+bool AdministradorUsu::creaUsuario(){
     string nombre, email;
     int tipo;
     bool encontrado = true;
@@ -257,11 +257,12 @@ void AdministradorUsu::creaUsuario(){
 
         fichero << aux.getnick() << " " << aux.getpassword() << " " << aux.getnombrecompleto() << " " << aux.getemail() << " " << aux.gettipo() << endl;
         cout << "Usuario añadido con exito." << endl;
+	return true;
     }else{
         cout << "El usuario ya se encuentra en la base de datos." << endl;
     }
 
-    
+   return false; 
 }
 
 bool AdministradorUsu::actualizaUsuario(){
