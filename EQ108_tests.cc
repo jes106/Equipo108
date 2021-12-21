@@ -46,7 +46,7 @@ TEST(actualizaMaquina,TestMaquinaAct){
 }
 
 TEST(busca_maquina,TestBuscaMaquina){
-	int id;
+	string id;
 	cout<<"Los nº de identificacion válidos son: 001\t002\t003\t004"<<endl;
 	cin>>id;
 	EXPECT_EQ(true,busca_maquina(id));

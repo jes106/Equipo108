@@ -348,12 +348,12 @@ bool AdministradorMaq::actualizaMaquina(){
             maqaux.setram(maqlec.ram);
             maqaux.setnucleoslib(maqlec.nucleoslibres);
             maqaux.setramlib(maqlec.ramlibre);
-cout << "ID -> " << maqaux.getid() << endl;
-cout << "Nombre -> " << maqaux.getnombre() << endl;
-cout << "Nucleos -> " << maqaux.getnucleos() << endl;
-cout << "RAM -> " << maqaux.getram() << endl;
-cout << "Nucleos Libres -> " << maqaux.getnucleoslib() << endl;
-cout << "RAM Libre -> " << maqaux.getramlib() << endl;
+            cout << "ID -> " << maqaux.getid() << endl;
+            cout << "Nombre -> " << maqaux.getnombre() << endl;
+            cout << "Nucleos -> " << maqaux.getnucleos() << endl;
+            cout << "RAM -> " << maqaux.getram() << endl;
+            cout << "Nucleos Libres -> " << maqaux.getnucleoslib() << endl;
+            cout << "RAM Libre -> " << maqaux.getramlib() << endl;
         }  
     }
 
@@ -408,7 +408,7 @@ bool AdministradorMaq::creaMaquina(){
 
         fichero << aux.id << " " << aux.nombre << " " << aux.nucleos << " " << aux.ram << " " << aux.nucleoslibres << " " << aux.ramlibre << endl;
         cout << "Maquina añadida con exito." << endl;
-        encontrado == true;
+        encontrado = true;
     }
 
     return encontrado;
