@@ -1,4 +1,5 @@
 #include "Clases.h"
+#include "Funciones.h"
 #include "gtest/gtest.h"
 
 TEST(menuAdminUsuarios,Testsmenus){
