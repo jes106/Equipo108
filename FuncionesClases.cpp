@@ -354,6 +354,7 @@ bool AdministradorMaq::actualizaMaquina(){
             cout << "RAM -> " << maqaux.getram() << endl;
             cout << "Nucleos Libres -> " << maqaux.getnucleoslib() << endl;
             cout << "RAM Libre -> " << maqaux.getramlib() << endl;
+            encontrado=true;
         }  
     }
 
