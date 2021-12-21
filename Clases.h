@@ -50,7 +50,7 @@ protected:
 
 class AdministradorUsu: public Administrador{
 public:
-    void creaUsuario();                                                         //Funciones Modificadas
+    bool creaUsuario();                                                         //Funciones Modificadas
     bool actualizaUsuario();
 
     //bool creaUsuario(string nick, string nombrecompleto, string password, string edad, string tipo);
