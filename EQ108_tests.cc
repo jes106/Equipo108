@@ -33,6 +33,6 @@ TEST(menuUsuarios,Testsmenus){
 }
 
 TEST(creaReserva,TestReserva){
-	Usuario usu;
-	EXPECT_EQ(true,usu.creaReserva(manolo));
+	Reservas res;
+	EXPECT_EQ(true,res.creaReserva("manolo"));
 }
