@@ -354,6 +354,7 @@ cout << "Nucleos -> " << maqaux.getnucleos() << endl;
 cout << "RAM -> " << maqaux.getram() << endl;
 cout << "Nucleos Libres -> " << maqaux.getnucleoslib() << endl;
 cout << "RAM Libre -> " << maqaux.getramlib() << endl;
+encontrado=true;
         }  
     }
 
@@ -408,7 +409,7 @@ bool AdministradorMaq::creaMaquina(){
 
         fichero << aux.id << " " << aux.nombre << " " << aux.nucleos << " " << aux.ram << " " << aux.nucleoslibres << " " << aux.ramlibre << endl;
         cout << "Maquina añadida con exito." << endl;
-        encontrado == true;
+        encontrado = true;
     }
 
     return encontrado;
