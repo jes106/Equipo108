@@ -52,3 +52,24 @@ TEST(busca_maquina,TestBuscaMaquina){
 	cin>>id;
 	EXPECT_EQ(true,busca_maquina(id));
 }
+
+TEST(getsettipo, User){
+	Usuario user;
+	user.settipo(3);
+	EXPECT_EQ(3,user.gettipo());
+	
+}
+
+TEST(getsetnick, User){
+	Usuario user;
+	user.setnick("i02essej");
+	EXPECT_EQ("i02essej",user.getnick());
+	
+}
+
+TEST(getsetnick, Maq){
+	Maquinas maq;
+	maq.setnick("MaquinaPrueba");
+	EXPECT_EQ("MaquinaPrueba",maq.getnick());
+	
+}
