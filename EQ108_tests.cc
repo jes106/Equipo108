@@ -1,15 +1,9 @@
 #include "Clases.h"
 #include "gtest/gtest.h"
 
-TEST(menuAdmin1,Testsmenus){
-
+TEST(menuAdminUsuarios,Testsmenus){
     EXPECT_GT(menuAdmin1(),-1);
-    EXPECT_GT(menuAdmin2(),-1);
-    EXPECT_GT(menuUsuario(),-1);
-
-    EXPECT_LT(menuAdmin1(),9);
-    EXPECT_LT(menuAdmin2(),9);
-    EXPECT_LT(menuUsuario(),9);
+    EXPECT_LT(menuAdmin1(),4);    
 }
 
 TEST(AdministradorUser, CrearUsuario){
@@ -26,4 +20,19 @@ TEST(AdministradorUser, ModificarUser){
 	std::cout<<"---------------------------------"<<endl<<"PRUEBE A ELIMINAR i02essej"<<endl<<"---------------------------------"<<endl;
 	EXPECT_EQ(true,adminus.actualizaUsuario());
 	
+}
+
+TEST(menuAdminMaquinas,Testsmenus){
+    EXPECT_GT(menuAdmin2(),3);
+    EXPECT_LT(menuAdmin2(),7);    
+}
+
+TEST(menuUsuarios,Testsmenus){
+    EXPECT_GT(menuUsuario(),6);
+    EXPECT_LT(menuUsuario(),9);
+}
+
+TEST(creaReserva,TestReserva){
+	Usuario usu;
+	EXPECT_EQ(true,usu.creaReserva(manolo));
 }
